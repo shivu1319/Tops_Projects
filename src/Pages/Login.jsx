@@ -1,127 +1,221 @@
-import React, { useState } from "react";
+import React,{useState} from "react";
+import { Link } from "react-router-dom";
+
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 import { toast } from "react-toastify";
 
 function Login() {
-  const redirect = useNavigate();
 
-  const [formValue, setFormValue] = useState({
-    email: "",
-    pass: "",
-  });
+  const [formvalue,setFormvalue]=useState({
+    name:"",
+    email:"",
+    pass:"",
+    mobile:""
+})
 
-  const onchange = (e) => {
-    setFormValue({ ...formValue, [e.target.name]: e.target.value });
-    console.log(formValue);
-  };
+const onchange=(e)=>{
+    setFormvalue({...formvalue,id:new Date().getTime().toString(),[e.target.name]:e.target.value});
+    console.log(formvalue);
+}
 
-  function validation() {
-    var result = true;
-
-    if (formValue.email == "") {
-      toast.error("Email field is Required !");
-      result = false;
-    }
-    if (formValue.pass == "") {
-      toast.error("Password field is Required !");
-      result = false;
-    }
-    return result;
-  }
-
-  const onsubmit = async (e) => {
+const onsubmit=async(e)=>{
     e.preventDefault();
-    if (validation()) {
-      const res = await axios.get(
-        `http://localhost:3000/signup?email=${formValue.email}`
-      );
-
-      // alert("Password is Incorrect !");
-      if (res.data.length > 0) {
-        if (res.data[0].pass == formValue.pass) {
-          localStorage.setItem("username", res.data[0].name);
-          localStorage.setItem("uid", res.data[0].id);
-
-          toast.success("Login Success !");
-          redirect("/Admin");
-        } else {
-          toast.error("Password is Incorrect !");
-          return false;
+    
+    {
+        const res=await axios.post(` http://localhost:3000/signup`,formvalue);
+        if(res.status==201){
+            toast.success('Success')
+            setFormvalue({...formvalue,name:"",email:"",pass:"",mobile:""})
         }
-      } else {
-        toast.error("Email is incorrect !");
-      }
     }
-  };
+}
+
+const resetall=()=> {
+    setFormvalue({...formvalue,name:"",email:"",pass:"",mobile:""})
+}
+
+
+
+
 
   return (
-    <div
-      className="container"
-      style={{ backgroundColor: "#E2E2E2", height: "100vh" }}
-    >
-      <div className="row text-center " style={{ paddingTop: 100 }}>
-        <div className="col-md-12">
-          <img src="assets/img/logo-invoice.png" />
-        </div>
-      </div>
-      <div className="row ">
-        <div className="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
-          <div className="panel-body">
-            <form role="form">
-              <hr />
-              <h5>Enter Details to Login</h5>
-              <br />
-              <div className="form-group input-group">
-                <span className="input-group-addon">
-                  <i className="fa fa-tag" />
-                </span>
-                <input
-                  type="email"
-                  value={formValue.email}
-                  onChange={onchange}
-                  name="email"
-                  className="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                />
+    <div>
+      <section className="h-100 bg-dark">
+        <div className="container py-5 h-100">
+          <div className="row d-flex justify-content-center align-items-center h-100">
+            <div className="col">
+              <div className="card card-registration my-4">
+                <div className="row g-0">
+                  <div className="col-xl-6 d-none d-xl-block">
+                    <img
+                      src="https://freepngimg.com/save/18945-shopping-png-hd/1112x1021"
+                      alt="Sample photo"
+                      className="img-fluid"
+                      style={{
+                        borderTopLeftRadius: ".25rem",
+                        borderBottomLeftRadius: ".25rem",
+                        height:"800px"
+                      }}
+                    />
+                  </div>
+                  <div className="col-xl-6">
+                    <div className="card-body p-md-5 text-black">
+                      <h3 className="mb-5 text-uppercase">Sign Up Form</h3>
+                      <div className="row">
+                        <div className="col-md-12 mb-4">
+                          <div className="form-outline">
+                            <input
+                              type="text"
+                              id="form3Example1m"
+                              className="form-control form-control-lg"
+                              value={formvalue.name} onChange={onchange} name="name" placeholder='Name'
+                            />
+                            <label
+                              className="form-label"
+                              htmlFor="form3Example1m"
+                            >
+                              First name
+                            </label>
+                          </div>
+                          <div className="form-outline mb-4">
+                            <input
+                              type="text"
+                              id="form3Example97"
+                              className="form-control form-control-lg"
+                              value={formvalue.email} onChange={onchange} name="email" placeholder='Email'
+                            />
+                            <label
+                              className="form-label"
+                              htmlFor="form3Example97"
+                            >
+                              Email ID
+                            </label>
+                          </div>
+                          <div className="form-outline mb-4">
+                            <input
+                              type="text"
+                              id="form3Example90"
+                              className="form-control form-control-lg"
+                              value={formvalue.pass} onChange={onchange} name="pass" placeholder='Password'
+                            />
+                            <label
+                              className="form-label"
+                              htmlFor="form3Example90"
+                            >
+                              Password
+                            </label>
+                          </div>
+                          <div className="form-outline mb-4">
+                            <input
+                              type="text"
+                              id="form3Example99"
+                              className="form-control form-control-lg"
+                              value={formvalue.mobile} onChange={onchange} name="mobile" placeholder='Mobile Number'
+                            />
+                            <label
+                              className="form-label"
+                              htmlFor="form3Example99"
+                            >
+                              Mobile Number
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                        <h4 className="mb-0 me-4">Gender: &nbsp; </h4>
+                        <div className="form-check form-check-inline mb-0 me-4">
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name="inlineRadioOptions"
+                            id="femaleGender"
+                            defaultValue="option1"
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="femaleGender"
+                          >
+                            Female
+                          </label>
+                        </div>
+                        <div className="form-check form-check-inline mb-0 me-4">
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name="inlineRadioOptions"
+                            id="maleGender"
+                            defaultValue="option2"
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="maleGender"
+                          >
+                            Male
+                          </label>
+                        </div>
+                        <div className="form-check form-check-inline mb-0">
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name="inlineRadioOptions"
+                            id="otherGender"
+                            defaultValue="option3"
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="otherGender"
+                          >
+                            Other
+                          </label>
+                        </div>
+                      </div>
+                      <div className="row">
+                      <div className="col-md-3 mb-4">
+                          <select className="select">
+                            <option value={1}>Country</option>
+                            <option value={2}>India</option>
+                            <option value={3}>Russia</option>
+                            <option value={4}>New York</option>
+                          </select>
+                        </div>
+                        <div className="col-md-3 mb-4">
+                          <select className="select">
+                            <option value={1}>State</option>
+                            <option value={2}>Gujrat</option>
+                            <option value={3}>Maharashtra</option>
+                            <option value={4}>rajshthan</option>
+                          </select>
+                        </div>
+                        <div className="col-md-6 mb-4">
+                          <select className="select">
+                            <option value={1}>City</option>
+                            <option value={2}>Ahmedabad</option>
+                            <option value={3}>Mumbai</option>
+                            <option value={4}>Udaypur</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div className="d-flex justify-content-end pt-3">
+                        <button onClick={resetall} type="button" className="btn btn-light btn-lg">
+                          Reset all
+                        </button>
+                        <button onClick={onsubmit}
+                          type="button"
+                          className="btn btn-warning btn-lg ms-2"
+                        >
+                          Submit form
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="form-group input-group">
-                <span className="input-group-addon">
-                  <i className="fa fa-lock" />
-                </span>
-                <input
-                  type="password"
-                  value={formValue.pass}
-                  onChange={onchange}
-                  name="pass"
-                  className="form-control"
-                  id="exampleInputPassword1"
-                />
-              </div>
-              <div className="form-group">
-                <label className="checkbox-inline">
-                  <input type="checkbox" /> Remember me
-                </label>
-                <span className="pull-right">
-                  <a href="index.html">Forget password ? </a>
-                </span>
-              </div>
-              <a
-                href="index.html"
-                onClick={onsubmit}
-                className="btn btn-primary "
-              >
-                Login Now
-              </a>
-              <hr />
-              Not register ? <a href="index.html">click here </a> or go to{" "}
-              <a href="index.html">Home</a>
-            </form>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

@@ -13,119 +13,251 @@ function Header() {
   };
 
   return (
-    <div>
-      <nav
-        className="navbar navbar-default navbar-cls-top "
-        role="navigation"
-        style={{ marginBottom: 0 }}
-      >
-        <div className="navbar-header">
-          <button
-            type="button"
-            className="navbar-toggle"
-            data-toggle="collapse"
-            data-target=".sidebar-collapse"
-          >
-            <span className="sr-only">Toggle navigation</span>
-            <span className="icon-bar" />
-            <span className="icon-bar" />
-            <span className="icon-bar" />
-          </button>
-          <Link className="navbar-brand" to="/index">
-            Binary admin
-          </Link>
+    <div className="banner_bg_main">
+      {/* header top section start */}
+      <div className="container">
+        <div className="header_section_top">
+          <div className="row">
+            <div className="col-sm-12">
+              <div className="custom_menu">
+                <ul>
+                  <li>
+                    <NavLink to="/Home">Home</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/Men">Men</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/Jwellary">Jwellary</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/Electronics">Electronics</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/Contact">Contact</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/Login">Sign Up</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/Profile">
+                      {" "}
+                      <i class="fa-solid fa-user"></i>{" "}
+                    </NavLink>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
-        <div
-          style={{
-            color: "white",
-            padding: "15px 50px 5px 50px",
-            float: "right",
-            fontSize: 16,
-          }}
-        >
-          {" "}
-          Last access : 28 Sep 2023 &nbsp;{" "}
-          {(() => {
-            if (localStorage.getItem("uid")) {
-              return (
-                <>
-                  <Link to="/profile">
-                    <i className="fa fa-user" aria-hidden="true" />
-                    <span>{localStorage.getItem("username")}</span>
+      </div>
+      {/* header top section start */}
+      {/* logo section start */}
+      <div className="logo_section">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12">
+              <div className="logo">
+                <a href="index.html">
+                  <img src="images/logo.png" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* logo section end */}
+      {/* header section start */}
+      <div className="header_section">
+        <div className="container">
+          <div className="containt_main">
+            <div id="mySidenav" className="sidenav">
+              <Link
+                to="/javascript:void(0)"
+                className="closebtn"
+                onclick="closeNav()"
+              ></Link>
+              <Link to="/index">Home</Link>
+              <Link to="/fashion">Fashion</Link>
+              <Link to="/electronic">Electronic</Link>
+              <Link to="/jewellery">Jewellery</Link>
+            </div>
+            <span className="toggle_icon" onclick="openNav()">
+              <img src="images/toggle-icon.png" />
+            </span>
+            <div className="dropdown">
+              <button
+                className="btn btn-secondary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                All Category
+              </button>
+              <div
+                className="dropdown-menu"
+                aria-labelledby="dropdownMenuButton"
+              >
+                <Link className="dropdown-item" to="/">
+                  Action
+                </Link>
+                <Link className="dropdown-item" to="/">
+                  Another action
+                </Link>
+                <Link className="dropdown-item" to="/">
+                  Something else here
+                </Link>
+              </div>
+            </div>
+            <div className="main">
+              {/* Another variation with a button */}
+              <div className="input-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Search this blog"
+                />
+                <div className="input-group-append">
+                  <button
+                    className="btn btn-secondary"
+                    type="button"
+                    style={{
+                      backgroundColor: "#f26522",
+                      borderColor: "#f26522",
+                    }}
+                  >
+                    <i className="fa fa-search" />
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="header_box">
+              <div className="lang_box ">
+                <Link
+                  to="/"
+                  title="Language"
+                  className="nav-link"
+                  data-toggle="dropdown"
+                  aria-expanded="true"
+                >
+                  <img
+                    src="images/flag-uk.png"
+                    alt="flag"
+                    className="mr-2 "
+                    title="United Kingdom"
+                  />{" "}
+                  English{" "}
+                  <i className="fa fa-angle-down ml-2" aria-hidden="true" />
+                </Link>
+                <div className="dropdown-menu ">
+                  <Link to="/" className="dropdown-item">
+                    <img
+                      src="images/flag-france.png"
+                      className="mr-2"
+                      alt="flag"
+                    />
+                    French
                   </Link>
-                  <a href="javascript:void(0)" onClick={logout}>
-                    <Link to="/" className="btn btn-danger square-btn-adjust">
-                      Logout
-                    </Link>
-                  </a>
-                </>
-              );
-            } else {
-              return (
-                <>
-                  <Link to="/Log">
-                    <i className="fa fa-user" aria-hidden="true" />
-                    <span>Login</span>
-                  </Link>
-                </>
-              );
-            }
-          })()}
+                </div>
+              </div>
+              <div className="login_menu">
+              {(() => {
+                  if (localStorage.getItem("uid")) {
+                    return (
+                      <>
+                        <Link to="/profile">
+                          <i className="fa fa-user" aria-hidden="true" />
+                          <span>{localStorage.getItem("username")}</span>
+                        </Link>
+                        <a href="javascript:void(0)" onClick={logout}>
+                          <span> &nbsp; Logout</span>
+                        </a>
+                      </>
+                    );
+                  } else {
+                    return (
+                      <>
+                        <Link to="/Log">
+                          <i className="fa fa-user" aria-hidden="true" />
+                          <span>Login</span>
+                        </Link>
+                      </>
+                    );
+                  }
+                })()}
+              </div>
+            </div>
+          </div>
         </div>
-      </nav>
-      {/* /. NAV TOP  */}
-      <nav className="navbar-default navbar-side" role="navigation">
-        <div className="sidebar-collapse">
-          <ul className="nav" id="main-menu">
-            <li className="text-center">
-              <img
-                src="assets/img/find_user.png"
-                className="user-image img-responsive"
-              />
-            </li>
-            <li>
-              <NavLink className="active-menu" to="/Home">
-                <i className="fa fa-dashboard fa-3x" /> Dashboard
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/Admin">
-                <i className="fa fa-user fa-3x" /> &nbsp; Admin
-              </NavLink>
-            </li>
-            <li>
-              <Link to="/Manage_categories">
-                <i className="fa fa-table fa-3x" /> Manage_categories
-              </Link>
-            </li>
-            <li>
-              <Link to="/Add_categories">
-                <i className="fa fa-edit fa-3x" /> Add Categories
-              </Link>
-            </li>
-            <li>
-              <Link to="/Manage_Products">
-                <i className="fa fa-table fa-3x" /> Manage Products
-              </Link>
-            </li>
-            <li>
-              <Link to="/Add_Products">
-                <i className="fa fa-edit fa-3x" /> Add Products
-              </Link>
-            </li>
-            <li>
-              <Link to="/Manage_user">
-                <i className="fa fa-edit fa-3x" /> Manage User
-              </Link>
-            </li>
-            <li>
-              <Link to="/Header">
-                <i className="fa fa-square-o fa-3x" /> Blank Page
-              </Link>
-            </li>
-          </ul>
+      </div>
+      {/* header section end */}
+      {/* banner section start */}
+      <div className="banner_section layout_padding">
+        <div className="container">
+          <div id="my_slider" className="carousel slide" data-ride="carousel">
+            <div className="carousel-inner">
+              <div className="carousel-item active">
+                <div className="row">
+                  <div className="col-sm-12">
+                    <h1 className="banner_taital">
+                      Get Start <br />
+                      Your favriot shoping
+                    </h1>
+                    <div className="buynow_bt">
+                      <Link to="/">Buy Now</Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="carousel-item">
+                <div className="row">
+                  <div className="col-sm-12">
+                    <h1 className="banner_taital">
+                      Get Start <br />
+                      Your favriot shoping
+                    </h1>
+                    <div className="buynow_bt">
+                      <Link to="/">Buy Now</Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="carousel-item">
+                <div className="row">
+                  <div className="col-sm-12">
+                    <h1 className="banner_taital">
+                      Get Start <br />
+                      Your favriot shoping
+                    </h1>
+                    <div className="buynow_bt">
+                      <Link to="/">Buy Now</Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <Link
+              className="carousel-control-prev"
+              to="/my_slider"
+              role="button"
+              data-slide="prev"
+            >
+              <i className="fa fa-angle-left" />
+            </Link>
+            <Link
+              className="carousel-control-next"
+              to="/my_slider"
+              role="button"
+              data-slide="next"
+            >
+              <i className="fa fa-angle-right" />
+            </Link>
+          </div>
         </div>
-      </nav>
+      </div>
+      {/* banner section end */}
     </div>
   );
 }
