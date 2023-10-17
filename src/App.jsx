@@ -13,6 +13,7 @@ import Login from "./Pages/Login";
 import Log from "./Pages/Log";
 import Contact from "./Pages/Contact";
 import Profile from "./Pages/Profile";
+import Product from "./Pages/Product";
 
 
 function App() {
@@ -21,8 +22,8 @@ function App() {
     <ToastContainer></ToastContainer>
       <Routes>
       <Route path='/' exact element={<> <Header/> <Home/> <Footer/></>}></Route>
-      {/* <Route path='/Home' index element={<> <Header/> <Home/> <Footer/></>}></Route> */}
-      <Route path='/Men'  element={<> <Header/> <Men/> <Footer/></>}></Route>
+      <Route path='/Home' index element={<> <Header/> <Home/> <Footer/></>}></Route>
+      <Route path='/Product'  element={<> <Header/> <Product/> <Footer/></>}></Route>
       <Route path='/Jwellary'  element={<> <Header/> <Jwellary/> <Footer/></>}></Route>
       <Route path='/Electronics'  element={<> <Header/> <Electronics/> <Footer/></>}></Route>
       <Route path='/Contact'  element={<>  <Contact/></>}></Route>

@@ -1,6 +1,11 @@
-import React from "react";
+import React from 'react'
+
+
+
 
 function Men() {
+
+ 
   return (
     <div>
       <div className="fashion_section">

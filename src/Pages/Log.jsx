@@ -43,12 +43,20 @@ function Log() {
       // alert("Password is Incorrect !");
       if (res.data.length > 0) 
       {
-        if (res.data[0].pass == formValue.pass) {
+        if (res.data[0].pass == formValue.pass) 
+        {
+          if (res.data[0].status == "Unblock") 
+          {
           localStorage.setItem('username', res.data[0].name);
           localStorage.setItem('uid', res.data[0].id);
         
           toast.success("Login Success !");
           redirect('/Men');
+          }
+          else{
+            toast.error("Account is blocked !");
+            return false;
+          }
         } else {
             toast.error("Password is Incorrect !");
           return false;

@@ -12,6 +12,10 @@ function Header() {
     return redirect("/");
   };
 
+  const openNav = () => {document.getElementById("mySidenav").style.width = "250px"}
+  const closeNav = () => {document.getElementById("mySidenav").style.width = "0"}
+
+  
   return (
     <div className="banner_bg_main">
       {/* header top section start */}
@@ -25,7 +29,7 @@ function Header() {
                     <NavLink to="/Home">Home</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/Men">Men</NavLink>
+                    <NavLink to="/Product">Clothes</NavLink>
                   </li>
                   <li>
                     <NavLink to="/Jwellary">Jwellary</NavLink>
@@ -71,18 +75,20 @@ function Header() {
       <div className="header_section">
         <div className="container">
           <div className="containt_main">
-            <div id="mySidenav" className="sidenav">
-              <Link
-                to="/javascript:void(0)"
+            <div id="mySidenav" className="sidenav" >
+              <a
+                href="javascript:void(0)"
                 className="closebtn"
-                onclick="closeNav()"
-              ></Link>
-              <Link to="/index">Home</Link>
-              <Link to="/fashion">Fashion</Link>
-              <Link to="/electronic">Electronic</Link>
-              <Link to="/jewellery">Jewellery</Link>
+                onClick={closeNav}
+              >
+                &times;
+              </a>
+              <Link to="/">Home</Link>
+              <Link to="/Men">Fashion</Link>
+              <Link to="/Electronics">Electronic</Link>
+              <Link to="/Jwellary">Jewellery</Link>
             </div>
-            <span className="toggle_icon" onclick="openNav()">
+            <span className="toggle_icon" onClick={openNav}>
               <img src="images/toggle-icon.png" />
             </span>
             <div className="dropdown">
@@ -94,20 +100,20 @@ function Header() {
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                All Category
+                Categories
               </button>
               <div
                 className="dropdown-menu"
-                aria-labelledby="dropdownMenuButton"
+                aria-labelledby="dropdownMeznuButton"
               >
-                <Link className="dropdown-item" to="/">
-                  Action
+                <Link  className="dropdown-item" to="/Men">
+                  Clothes
                 </Link>
-                <Link className="dropdown-item" to="/">
-                  Another action
+                <Link  className="dropdown-item" to="/Electronics">
+                  Electronics
                 </Link>
-                <Link className="dropdown-item" to="/">
-                  Something else here
+                <Link  className="dropdown-item" to="/Jwellary">
+                  Jwellary
                 </Link>
               </div>
             </div>
@@ -168,11 +174,11 @@ function Header() {
                     return (
                       <>
                         <Link to="/profile">
-                          <i className="fa fa-user" aria-hidden="true" />
-                          <span>{localStorage.getItem("username")}</span>
-                        </Link>
-                        <a href="javascript:void(0)" onClick={logout}>
-                          <span> &nbsp; Logout</span>
+                          <i className="fa fa-user" aria-hidden="true" style={{color:"white", marginTop:10}} /> &nbsp;
+                          <span style={{fontSize:16 , color:"white"}}>{localStorage.getItem("username")}</span>
+                        </Link> &nbsp;
+                        <a href="javascript:void(0)" onClick={logout}  style={{color:"white", marginTop:2 , fontSize:15}} >
+                          <span  > &nbsp; Logout</span>
                         </a>
                       </>
                     );
